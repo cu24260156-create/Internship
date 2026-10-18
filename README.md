@@ -28,8 +28,8 @@ An intelligent, full-stack AI-powered Internship Assistant and Career Guidance C
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/cu24260156-create/ELiteTechIntern.git
-cd InternshipChatbot
+git clone https://github.com/cu24260156-create/Internship.git
+cd Internship
 ```
 
 ### 2. Create and activate virtual environment
