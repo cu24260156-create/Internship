@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship FAQ Assistant — Dashboard</title>
+    <!-- Instant Anti-FOUC Theme Resolution Script -->
+    <script>
+        (function() {
+            try {
+                var pref = localStorage.getItem("internbot_theme") || "system";
+                var resolved = pref;
+                if (pref === "system") {
+                    resolved = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+                }
+                document.documentElement.setAttribute("data-theme", resolved);
+                document.documentElement.setAttribute("data-theme-preference", pref);
+            } catch (e) {}
+        })();
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Google Identity Services (OAuth) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-avatar">🎓</div>
+                    <div class="brand-info">
+                        <h2>InternBot</h2>
+                        <span class="status-indicator"><span class="status-dot"></span> Online · AI Assistant</span>
+                    </div>
+                </div>
+                <button class="icon-btn mobile-close" id="sidebar-close-btn" type="button" aria-label="Close menu">✕</button>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <button class="nav-item active" data-view="home" type="button">
+                    <span class="nav-icon">⌂</span>
+                    <span class="nav-text">Home & Chat</span>
+                </button>
+                <button class="nav-item" data-view="search" type="button">
+                    <span class="nav-icon">⌕</span>
+                    <span class="nav-text">Search & Filter</span>
+                </button>
+                <button class="nav-item" data-view="roadmaps" type="button">
+                    <span class="nav-icon">🗺️</span>
+                    <span class="nav-text">Categories & Roadmaps</span>
+                </button>
+                <button class="nav-item" data-view="interviews" type="button">
+                    <span class="nav-icon">💡</span>
+                    <span class="nav-text">Mock Interviews & MCQs</span>
+                </button>
+                <button class="nav-item" data-view="resume" type="button">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">ATS Resume Checker</span>
+                </button>
+                <button class="nav-item" data-view="tracker" type="button">
+                    <span class="nav-icon">📌</span>
+                    <span class="nav-text">Applications & Bookmarks</span>
+                </button>
+                <button class="nav-item" data-view="companies" type="button">
+                    <span class="nav-icon">▣</span>
+                    <span class="nav-text">Company Portals</span>
+                </button>
+                <button class="nav-item" data-view="history" type="button">
+                    <span class="nav-icon">◷</span>
+                    <span class="nav-text">Chat History</span>
+                </button>
+                <button class="nav-item" data-view="settings" type="button">
+                    <span class="nav-icon">⚙</span>
+                    <span class="nav-text">Settings</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <!-- Theme Switcher in Sidebar -->
+                <div class="sidebar-theme-bar">
+                    <div class="sidebar-theme-header">
+                        <span class="sidebar-theme-label">Theme</span>
+                        <span class="sidebar-theme-current" id="sidebar-theme-current-text">System</span>
+                    </div>
+                    <div class="sidebar-theme-pill" id="sidebar-theme-pill" role="radiogroup" aria-label="Sidebar theme selection">
+                        <button type="button" class="sidebar-theme-btn" data-theme-val="light" title="Light Theme" aria-label="Light Theme">
+                            <span>☀️</span>
+                            <span class="btn-text">Light</span>
+                        </button>
+                        <button type="button" class="sidebar-theme-btn" data-theme-val="dark" title="Dark Theme" aria-label="Dark Theme">
+                            <span>🌙</span>
+                            <span class="btn-text">Dark</span>
+                        </button>
+                        <button type="button" class="sidebar-theme-btn" data-theme-val="system" title="System Theme (Follow OS)" aria-label="System Theme">
+                            <span>💻</span>
+                            <span class="btn-text">Auto</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Guest View: Sign In -->
+                <div class="auth-guest" id="auth-guest-box">
+                    <div class="auth-callout">
+                        <p class="auth-tip">Sign in to save chat history, bookmarks, and skill roadmaps.</p>
+                        <div id="g_id_onload"
+                             data-client_id="{{ google_client_id }}"
+                             data-context="signin"
+                             data-ux_mode="popup"
+                             data-callback="handleGoogleCredential"
+                             data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with" data-size="medium" data-logo_alignment="left"></div>
+                        <button class="btn btn-secondary btn-sm btn-block demo-signin-btn" id="demo-signin-btn" type="button">
+                            <span>🔑</span> Sign in with Demo Account
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Logged In View: User Profile -->
+                <div class="auth-user hidden" id="auth-user-box">
+                    <div class="user-card">
+                        <img class="user-avatar" id="user-avatar-img" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🎓</text></svg>" alt="User avatar">
+                        <div class="user-details">
+                            <span class="user-name" id="user-name-display">Student User</span>
+                            <span class="user-email" id="user-email-display">user@gmail.com</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-ghost btn-sm btn-block" id="logout-btn" type="button">Sign Out</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="topbar">
+                <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open menu">☰</button>
+                <div class="topbar-title">
+                    <h1 id="topbar-heading">Internship FAQ Assistant</h1>
+                    <p class="topbar-sub"><span class="status-dot"></span> Online · replies instantly</p>
+                </div>
+                <div class="topbar-actions">
+                    <!-- Topbar Quick Theme Switcher -->
+                    <div class="theme-switcher-pill" id="topbar-theme-switcher" role="radiogroup" aria-label="Theme switcher">
+                        <button type="button" class="theme-pill-btn" data-theme-val="light" title="Light Theme" aria-label="Switch to Light Theme">
+                            <span class="theme-icon">☀️</span>
+                            <span class="theme-text">Light</span>
+                        </button>
+                        <button type="button" class="theme-pill-btn" data-theme-val="dark" title="Dark Theme" aria-label="Switch to Dark Theme">
+                            <span class="theme-icon">🌙</span>
+                            <span class="theme-text">Dark</span>
+                        </button>
+                        <button type="button" class="theme-pill-btn" data-theme-val="system" title="System Theme (Follow OS)" aria-label="Switch to System Theme">
+                            <span class="theme-icon">💻</span>
+                            <span class="theme-text">Auto</span>
+                        </button>
+                    </div>
+                    <button class="btn btn-outline btn-sm" id="new-chat-top-btn" type="button">
+                        <span>＋</span> New Chat
+                    </button>
+                </div>
+            </header>
+
+            <!-- VIEW 1: HOME & CHAT -->
+            <section class="view-panel active" id="view-home">
+                <!-- Hero Section -->
+                <div class="hero-section" id="hero-section">
+                    <h2 class="hero-title">How can I help you?</h2>
+                    <p class="hero-sub">Ask about Java, Python, JavaScript, Full-Stack internships, eligibility, stipend, roadmaps, and resume checks.</p>
+                    
+                    <!-- Search Bar in Hero -->
+                    <div class="hero-search-wrap">
+                        <span class="search-icon">⌕</span>
+                        <input type="text" class="hero-search-input" id="hero-search-input" placeholder="Search questions, skills (e.g. Spring Boot, React, Python), or company portals...">
+                    </div>
+
+                    <!-- 4 Quick Action Cards -->
+                    <div class="quick-cards-grid">
+                        <div class="quick-card" data-action="open-chat">
+                            <div class="quick-card-icon">💬</div>
+                            <div class="quick-card-content">
+                                <h3>Internship Chat</h3>
+                                <p>Ask any question without signing in.</p>
+                            </div>
+                        </div>
+
+                        <div class="quick-card" data-action="goto-roadmaps">
+                            <div class="quick-card-icon">🗺️</div>
+                            <div class="quick-card-content">
+                                <h3>Roadmaps & Skills</h3>
+                                <p>Java, Python, JS, Full-Stack roadmaps & trackers.</p>
+                            </div>
+                        </div>
+
+                        <div class="quick-card" data-action="goto-resume">
+                            <div class="quick-card-icon">📄</div>
+                            <div class="quick-card-content">
+                                <h3>ATS Resume Checker</h3>
+                                <p>Upload PDF/DOCX to get instant feedback.</p>
+                            </div>
+                        </div>
+
+                        <div class="quick-card" data-action="goto-companies">
+                            <div class="quick-card-icon">🏢</div>
+                            <div class="quick-card-content">
+                                <h3>Company Portals</h3>
+                                <p>Google, Microsoft, Amazon, TCS & AICTE.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Container -->
+                <div class="chat-container">
+                    <div class="chat-box" id="chat-box" aria-live="polite">
+                        <!-- Messages dynamically added here -->
+                    </div>
+
+                    <!-- Suggestions Chips Bar -->
+                    <div class="suggestions" id="suggestions" aria-label="Suggested questions"></div>
+
+                    <!-- Chat Form Bar -->
+                    <form class="chat-form" id="chat-form" autocomplete="off">
+                        <button class="icon-btn tool-btn" id="attach-notice-btn" type="button" title="Upload internship notice for verification">
+                            📷
+                        </button>
+                        <button class="icon-btn tool-btn" id="voice-input-btn" type="button" title="Speak to type (Voice input)">
+                            🎤
+                        </button>
+                        <input id="message" type="text" maxlength="500" placeholder="Ask about Java, Python, Web Dev, eligibility, stipend, resume…" aria-label="Type your question" required>
+                        <button type="submit" id="send-btn" aria-label="Send message">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                                <path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="chat-disclaimer">
+                        <span>💡 Answers provide guidance based on verified FAQs & official career standards. External links are for discovery only.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 2: SEARCH & FILTER -->
+            <section class="view-panel" id="view-search">
+                <div class="panel-header">
+                    <h2>Search Knowledge Base & Portals</h2>
+                    <p>Search across verified FAQs, 4 core categories, company portals, and your chat history.</p>
+                </div>
+                
+                <div class="search-controls-bar">
+                    <div class="search-bar-wrap">
+                        <span class="search-icon">⌕</span>
+                        <input type="text" class="search-input" id="search-view-input" placeholder="Type a keyword (e.g. Java, Python, Spring Boot, Google, stipend, resume, interview)..." autofocus>
+                    </div>
+                    <div class="search-filter-pills" id="search-filter-pills">
+                        <button class="filter-pill active" data-cat="all">All Domains</button>
+                        <button class="filter-pill" data-cat="java">Java</button>
+                        <button class="filter-pill" data-cat="python">Python</button>
+                        <button class="filter-pill" data-cat="javascript">JavaScript</button>
+                        <button class="filter-pill" data-cat="fullstack">Full-Stack</button>
+                    </div>
+                </div>
+
+                <div class="search-results-container" id="search-results-container">
+                    <div class="search-placeholder">Start typing above or select a filter pill to explore verified FAQs, roadmaps, and portals.</div>
+                </div>
+            </section>
+
+            <!-- VIEW 3: CATEGORIES & ROADMAPS -->
+            <section class="view-panel" id="view-roadmaps">
+                <div class="panel-header">
+                    <h2>Internship Categories & Learning Roadmaps</h2>
+                    <p>Select a category to view step-by-step roadmaps, track your skill mastery, and discover recommended portfolio projects.</p>
+                </div>
+
+                <!-- 4 Category Selector Tabs -->
+                <div class="category-tabs" id="category-tabs">
+                    <button class="cat-tab-btn active" data-cat="java">☕ Java Development</button>
+                    <button class="cat-tab-btn" data-cat="python">🐍 Python Development</button>
+                    <button class="cat-tab-btn" data-cat="javascript">⚡ JavaScript Development</button>
+                    <button class="cat-tab-btn" data-cat="fullstack">🌐 Full-Stack Development</button>
+                </div>
+
+                <!-- Category Content Container -->
+                <div class="roadmap-category-content" id="roadmap-category-content">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </section>
+
+            <!-- VIEW 4: MOCK INTERVIEW & MCQS -->
+            <section class="view-panel" id="view-interviews">
+                <div class="panel-header">
+                    <h2>Technical Interview Preparation & Topic MCQs</h2>
+                    <p>Practice topic-wise MCQs, test your fundamentals, and review conceptual interview questions with model answers.</p>
+                </div>
+
+                <div class="interview-nav-bar">
+                    <div class="interview-topic-select-wrap">
+                        <label for="interview-topic-select">Select Category:</label>
+                        <select id="interview-topic-select" class="form-select">
+                            <option value="java">☕ Java Development</option>
+                            <option value="python">🐍 Python Development</option>
+                            <option value="javascript">⚡ JavaScript Development</option>
+                            <option value="fullstack">🌐 Full-Stack Development</option>
+                        </select>
+                    </div>
+
+                    <div class="interview-mode-toggle">
+                        <button class="mode-btn active" id="mode-mcq-btn">📝 Topic MCQs</button>
+                        <button class="mode-btn" id="mode-mock-btn">🎙️ Mock Interview Q&A</button>
+                    </div>
+                </div>
+
+                <!-- MCQ Quiz Interface -->
+                <div class="interview-container" id="mcq-container">
+                    <div class="quiz-status-bar">
+                        <span id="quiz-progress-text">Question 1 of 3</span>
+                        <span class="quiz-score-badge" id="quiz-score-badge">Score: 0</span>
+                    </div>
+
+                    <div class="quiz-card" id="quiz-card">
+                        <h3 class="quiz-question" id="quiz-question-text">Loading question...</h3>
+                        <div class="quiz-options-list" id="quiz-options-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                        <div class="quiz-explanation hidden" id="quiz-explanation">
+                            <h4>Explanation:</h4>
+                            <p id="quiz-explanation-text"></p>
+                        </div>
+                    </div>
+
+                    <div class="quiz-actions-bar">
+                        <button class="btn btn-secondary" id="quiz-prev-btn" disabled>Previous</button>
+                        <button class="btn btn-primary" id="quiz-next-btn">Next Question</button>
+                        <button class="btn btn-success hidden" id="quiz-submit-btn">Submit & Save Score</button>
+                    </div>
+                </div>
+
+                <!-- Mock Interview Q&A Flashcards Container -->
+                <div class="interview-container hidden" id="mock-qa-container">
+                    <div class="mock-qa-intro">
+                        <h3>Frequently Asked Technical Interview Questions</h3>
+                        <p>Study key conceptual talking points asked by hiring managers at Google, Microsoft, Amazon, Infosys, and TCS.</p>
+                    </div>
+                    <div class="mock-qa-list" id="mock-qa-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Past Scores History -->
+                <div class="interview-history-section">
+                    <h3>📊 Your Practice Quiz History</h3>
+                    <div id="past-scores-table-wrap">
+                        <p class="text-muted">Sign in to automatically save and track your quiz progress over time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 5: ATS RESUME CHECKER -->
+            <section class="view-panel" id="view-resume">
+                <div class="panel-header">
+                    <h2>ATS Resume Checker & Keyword Analyzer</h2>
+                    <p>Upload your resume (PDF, DOCX, TXT) to get instant ATS scoring, detected technical skills, missing keywords, and actionable suggestions.</p>
+                </div>
+
+                <div class="resume-checker-grid">
+                    <!-- Upload Dropzone Card -->
+                    <div class="resume-upload-card">
+                        <div class="form-group">
+                            <label for="resume-target-category">Target Internship Role:</label>
+                            <select id="resume-target-category" class="form-select">
+                                <option value="Java">☕ Java Development</option>
+                                <option value="Python">🐍 Python Development</option>
+                                <option value="JavaScript">⚡ JavaScript Development</option>
+                                <option value="Full-Stack">🌐 Full-Stack Development</option>
+                                <option value="General" selected>General Software Engineering</option>
+                            </select>
+                        </div>
+
+                        <div class="dropzone resume-dropzone" id="resume-dropzone">
+                            <input type="file" id="resume-file-input" accept=".pdf, .docx, .doc, .txt" hidden>
+                            <div class="dropzone-content" id="resume-dropzone-content">
+                                <span class="dropzone-icon">📄</span>
+                                <p><strong>Click to choose your resume</strong> or drag & drop here</p>
+                                <span class="dropzone-hint">PDF, DOCX, or TXT up to 5MB</span>
+                            </div>
+                            <div class="resume-file-chosen hidden" id="resume-file-chosen">
+                                <span class="file-icon">📎</span>
+                                <span class="chosen-filename" id="chosen-filename">my_resume.pdf</span>
+                                <button type="button" class="btn btn-ghost btn-sm" id="remove-resume-btn">Change</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" id="analyze-resume-btn" type="button" disabled>
+                            <span>⚡</span> Analyze Resume ATS Score
+                        </button>
+
+                        <div class="privacy-note">
+                            🔒 <strong>Privacy Protection:</strong> Resumes are parsed safely in-memory for immediate feedback and are never stored on our server.
+                        </div>
+                    </div>
+
+                    <!-- Analysis Output Report Card -->
+                    <div class="resume-report-card" id="resume-report-card">
+                        <div class="report-placeholder" id="report-placeholder">
+                            <div class="placeholder-icon">📊</div>
+                            <h3>No Resume Analyzed Yet</h3>
+                            <p>Upload your resume on the left to see your ATS score, detected skills, and recommended improvements.</p>
+                        </div>
+
+                        <div class="report-results hidden" id="report-results">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 6: APPLICATION TRACKER & BOOKMARKS -->
+            <section class="view-panel" id="view-tracker">
+                <div class="panel-header">
+                    <h2>Applications Tracker & Saved Bookmarks</h2>
+                    <p>Track your internship application lifecycle, set follow-up reminders, and organize bookmarked vacancies.</p>
+                </div>
+
+                <div class="tracker-subnav">
+                    <button class="tracker-tab-btn active" data-tab="applications">📋 Tracked Applications (<span id="apps-count">0</span>)</button>
+                    <button class="tracker-tab-btn" data-tab="bookmarks">🔖 Bookmarks (<span id="bookmarks-count">0</span>)</button>
+                    <button class="tracker-tab-btn" data-tab="reminders">⏰ Reminders & Deadlines (<span id="reminders-count">0</span>)</button>
+                </div>
+
+                <!-- Tab 1: Applications -->
+                <div class="tracker-tab-content active" id="tab-applications">
+                    <div class="tracker-actions-bar">
+                        <div class="status-filters" id="app-status-filters">
+                            <button class="filter-chip active" data-status="all">All</button>
+                            <button class="filter-chip" data-status="Saved">Saved</button>
+                            <button class="filter-chip" data-status="Applied">Applied</button>
+                            <button class="filter-chip" data-status="Assessment">Assessment</button>
+                            <button class="filter-chip" data-status="Interview">Interview</button>
+                            <button class="filter-chip" data-status="Offer">Offer</button>
+                            <button class="filter-chip" data-status="Rejected">Rejected</button>
+                        </div>
+                        <button class="btn btn-primary btn-sm" id="open-add-app-modal-btn">＋ Track Application</button>
+                    </div>
+
+                    <div class="applications-grid" id="applications-grid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Tab 2: Bookmarks -->
+                <div class="tracker-tab-content" id="tab-bookmarks">
+                    <div class="tracker-actions-bar">
+                        <p class="section-desc">Quickly save and revisit internship listings or company portals.</p>
+                        <button class="btn btn-primary btn-sm" id="open-add-bookmark-modal-btn">＋ Add Bookmark</button>
+                    </div>
+
+                    <div class="bookmarks-grid" id="bookmarks-grid">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Tab 3: Reminders -->
+                <div class="tracker-tab-content" id="tab-reminders">
+                    <div class="tracker-actions-bar">
+                        <p class="section-desc">Keep track of test deadlines, interview dates, and follow-up emails.</p>
+                        <button class="btn btn-secondary btn-sm" id="request-browser-notif-btn">🔔 Enable Browser Notifications</button>
+                    </div>
+
+                    <div class="reminders-container">
+                        <!-- Inline Add Reminder Form -->
+                        <form class="inline-reminder-form" id="inline-reminder-form">
+                            <input type="text" id="reminder-title-input" placeholder="Reminder title (e.g. Google STEP round 1 interview)..." required>
+                            <input type="date" id="reminder-date-input" required>
+                            <select id="reminder-type-input" class="form-select">
+                                <option value="deadline">Deadline</option>
+                                <option value="interview">Interview</option>
+                                <option value="assessment">Assessment</option>
+                                <option value="followup">Follow-up</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Add Reminder</button>
+                        </form>
+
+                        <div class="reminders-list" id="reminders-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VIEW 7: COMPANY PORTALS DIRECTORY -->
+            <section class="view-panel" id="view-companies">
+                <div class="panel-header">
+                    <h2>Official Company Career Portals</h2>
+                    <p>Verified application portals for Big Tech, IT Services, and government internship programs.</p>
+                </div>
+                <div class="companies-filter-bar" id="companies-filter-bar">
+                    <button class="filter-chip active" data-filter="all">All Portals</button>
+                    <button class="filter-chip" data-filter="Big Tech">Big Tech</button>
+                    <button class="filter-chip" data-filter="IT Services">IT Services</button>
+                    <button class="filter-chip" data-filter="Enterprise & AI">Enterprise & AI</button>
+                    <button class="filter-chip" data-filter="Government & National">Government / AICTE</button>
+                </div>
+                <div class="companies-grid" id="companies-grid">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- VIEW 8: CHAT HISTORY -->
+            <section class="view-panel" id="view-history">
+                <div class="panel-header">
+                    <h2>Saved Chat History</h2>
+                    <p>Reopen, rename, or manage your previous internship discussions.</p>
+                </div>
+                <div id="history-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </section>
+
+            <!-- VIEW 9: CHATGPT-INSPIRED SETTINGS PAGE -->
+            <section class="view-panel" id="view-settings">
+                <div class="panel-header">
+                    <h2>Settings & Preferences</h2>
+                    <p>Customize your AI assistant, learning profile, custom instructions, memory, voice, and data controls.</p>
+                </div>
+
+                <div class="settings-layout">
+                    <!-- Settings Subnav Sidebar -->
+                    <aside class="settings-subnav">
+                        <button class="settings-tab-btn active" data-section="general"><span>⚙️</span> General</button>
+                        <button class="settings-tab-btn" data-section="appearance"><span>🎨</span> Appearance</button>
+                        <button class="settings-tab-btn" data-section="personalization"><span>🎯</span> Personalization</button>
+                        <button class="settings-tab-btn" data-section="custom-instructions"><span>📝</span> Custom Instructions</button>
+                        <button class="settings-tab-btn" data-section="memory"><span>🧠</span> Memory</button>
+                        <button class="settings-tab-btn" data-section="data-controls"><span>💾</span> Data Controls</button>
+                        <button class="settings-tab-btn" data-section="chat-prefs"><span>💬</span> Chat Preferences</button>
+                        <button class="settings-tab-btn" data-section="notifications"><span>🔔</span> Notifications</button>
+                        <button class="settings-tab-btn" data-section="voice-access"><span>♿</span> Voice & Accessibility</button>
+                        <button class="settings-tab-btn" data-section="connected-services"><span>🔗</span> Connected Services</button>
+                        <button class="settings-tab-btn" data-section="ai-config"><span>🤖</span> AI Configuration</button>
+                        <button class="settings-tab-btn" data-section="privacy-security"><span>🛡️</span> Privacy & Security</button>
+                        <button class="settings-tab-btn" data-section="account"><span>👤</span> Account</button>
+                        <button class="settings-tab-btn" data-section="about"><span>ℹ️</span> About</button>
+                    </aside>
+
+                    <!-- Settings Content Panels -->
+                    <div class="settings-content-wrap">
+
+                        <!-- SECTION 1: GENERAL -->
+                        <div class="settings-pane active" id="pane-general">
+                            <h3>General Settings</h3>
+                            <div class="settings-group">
+                                <label for="setting-theme">Color Theme</label>
+                                <select id="setting-theme" class="form-select">
+                                    <option value="light">☀️ Light</option>
+                                    <option value="dark">🌙 Dark</option>
+                                    <option value="system">💻 System Default</option>
+                                </select>
+                                <span class="settings-hint">Choose between clean light mode or comfortable dark mode. Live previews available in Appearance tab.</span>
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-language">Language</label>
+                                <select id="setting-language" class="form-select">
+                                    <option value="en">English</option>
+                                    <option value="hi">Hindi (हिंदी)</option>
+                                    <option value="hinglish">Hinglish</option>
+                                </select>
+                                <span class="settings-hint">Select the preferred language for chatbot explanations.</span>
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-answer-style">Answer Style</label>
+                                <select id="setting-answer-style" class="form-select">
+                                    <option value="balanced">Balanced (Clear bullet points & links)</option>
+                                    <option value="concise">Concise & Direct (Brief summary)</option>
+                                    <option value="detailed">In-depth (Comprehensive guides & code)</option>
+                                    <option value="beginner">Beginner Friendly (Simple terms with examples)</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-default-cat">Default Category</label>
+                                <select id="setting-default-cat" class="form-select">
+                                    <option value="java">☕ Java Development</option>
+                                    <option value="python">🐍 Python Development</option>
+                                    <option value="javascript">⚡ JavaScript Development</option>
+                                    <option value="fullstack">🌐 Full-Stack Development</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button class="btn btn-primary" id="save-general-btn">Save General Settings</button>
+                                <button class="btn btn-outline" id="reset-settings-btn">Reset All Settings</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 1B: APPEARANCE & THEMES -->
+                        <div class="settings-pane" id="pane-appearance">
+                            <div class="settings-pane-header">
+                                <h3>Appearance & Color Themes</h3>
+                                <p class="settings-sub">Customize the visual styling of your dashboard, chatbot, roadmaps, and tools.</p>
+                            </div>
+
+                            <div class="appearance-status-banner" id="appearance-status-banner">
+                                <span class="status-icon">🎨</span>
+                                <div class="status-info">
+                                    <span class="status-title">Current Theme: <strong id="appearance-active-label">System (Following OS)</strong></span>
+                                    <span class="status-sub" id="appearance-active-sub">Operating System theme is currently active.</span>
+                                </div>
+                                <span class="badge-success hidden" id="theme-save-toast">✓ Preference Saved</span>
+                            </div>
+
+                            <div class="theme-cards-grid" role="radiogroup" aria-label="Theme options">
+                                <!-- Light Theme Card -->
+                                <div class="theme-option-card" data-theme-choice="light" tabindex="0" role="radio" aria-checked="false">
+                                    <div class="theme-card-header">
+                                        <span class="theme-card-icon">☀️</span>
+                                        <div class="theme-card-titles">
+                                            <h4>Light Theme</h4>
+                                            <span class="theme-badge">Clean & Crisp</span>
+                                        </div>
+                                        <div class="theme-radio-indicator"></div>
+                                    </div>
+                                    <p class="theme-card-desc">Pure white backgrounds, dark gray text, and subtle borders. High contrast designed for bright study environments.</p>
+                                    <div class="theme-card-preview light-preview">
+                                        <div class="preview-sidebar"></div>
+                                        <div class="preview-main">
+                                            <div class="preview-bar"></div>
+                                            <div class="preview-bubble bot">Hello! How can I help?</div>
+                                            <div class="preview-bubble user">Java roadmap?</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dark Theme Card -->
+                                <div class="theme-option-card" data-theme-choice="dark" tabindex="0" role="radio" aria-checked="false">
+                                    <div class="theme-card-header">
+                                        <span class="theme-card-icon">🌙</span>
+                                        <div class="theme-card-titles">
+                                            <h4>Dark Theme</h4>
+                                            <span class="theme-badge">Eye Comfort</span>
+                                        </div>
+                                        <div class="theme-radio-indicator"></div>
+                                    </div>
+                                    <p class="theme-card-desc">Deep neutral #212121 backgrounds, #2A2A2A panels, and #F5F5F5 text. Comfortable contrast engineered for late-night sessions.</p>
+                                    <div class="theme-card-preview dark-preview">
+                                        <div class="preview-sidebar"></div>
+                                        <div class="preview-main">
+                                            <div class="preview-bar"></div>
+                                            <div class="preview-bubble bot">Hello! How can I help?</div>
+                                            <div class="preview-bubble user">Java roadmap?</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- System Theme Card -->
+                                <div class="theme-option-card" data-theme-choice="system" tabindex="0" role="radio" aria-checked="false">
+                                    <div class="theme-card-header">
+                                        <span class="theme-card-icon">💻</span>
+                                        <div class="theme-card-titles">
+                                            <h4>System Theme</h4>
+                                            <span class="theme-badge">Automatic</span>
+                                        </div>
+                                        <div class="theme-radio-indicator"></div>
+                                    </div>
+                                    <p class="theme-card-desc">Dynamically switches between Light and Dark based on your device's operating-system settings via <code>prefers-color-scheme</code>.</p>
+                                    <div class="theme-card-preview split-preview">
+                                        <div class="preview-half light-half">
+                                            <span>☀️ Light</span>
+                                        </div>
+                                        <div class="preview-half dark-half">
+                                            <span>🌙 Dark</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="appearance-save-row">
+                                <button type="button" class="btn btn-primary" id="save-appearance-btn">
+                                    <span>💾</span> Save Theme Preference
+                                </button>
+                                <span class="appearance-save-msg" id="appearance-save-feedback"></span>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 2: PERSONALIZATION -->
+                        <div class="settings-pane" id="pane-personalization">
+                            <h3>Personalization & Learning Profile</h3>
+                            <p class="settings-sub">Tailor project recommendations and roadmap milestones to your exact experience level.</p>
+
+                            <div class="settings-group">
+                                <label for="setting-exp-level">Experience Level</label>
+                                <select id="setting-exp-level" class="form-select">
+                                    <option value="Beginner">Beginner (1st / 2nd Year Student)</option>
+                                    <option value="Intermediate">Intermediate (Hands-on project experience)</option>
+                                    <option value="Advanced">Advanced (Final year / Pre-placement)</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-career-goals">Career Goal / Target Role</label>
+                                <input type="text" id="setting-career-goals" class="form-input" placeholder="e.g. SDE Intern, Backend Spring Boot Engineer, Full-Stack Developer">
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-current-skills">Current Skills (comma-separated)</label>
+                                <input type="text" id="setting-current-skills" class="form-input" placeholder="e.g. Java, OOP, SQL, Git">
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-desired-skills">Skills You Want to Learn</label>
+                                <input type="text" id="setting-desired-skills" class="form-input" placeholder="e.g. Spring Boot, Docker, React, Microservices">
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-learning-style">Preferred Learning Style</label>
+                                <select id="setting-learning-style" class="form-select">
+                                    <option value="Hands-on projects">Hands-on project building</option>
+                                    <option value="Documentation & Books">Official documentation & reading</option>
+                                    <option value="Video tutorials">Video tutorials & roadmaps</option>
+                                    <option value="Problem solving">LeetCode / Problem-solving first</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-group">
+                                <label for="setting-daily-time">Daily Learning Time</label>
+                                <select id="setting-daily-time" class="form-select">
+                                    <option value="30-60 mins">30 - 60 minutes</option>
+                                    <option value="1-2 hours">1 - 2 hours</option>
+                                    <option value="3+ hours">3+ hours</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button class="btn btn-primary" id="save-personalization-btn">Save Personalization Profile</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 3: CUSTOM INSTRUCTIONS -->
+                        <div class="settings-pane" id="pane-custom-instructions">
+                            <h3>Custom Instructions</h3>
+                            <p class="settings-sub">What would you like the AI to know about you to provide better answers?</p>
+
+                            <div class="settings-group">
+                                <label for="setting-custom-instructions">Custom Directives for the AI Assistant:</label>
+                                <textarea id="setting-custom-instructions" class="form-textarea" rows="5" placeholder="e.g. 'Explain in simple English with step-by-step examples. Focus on entry-level Indian IT internships and always mention if a company requires coding tests.'"></textarea>
+                                <span class="settings-hint">These instructions are automatically injected into the AI context for all future answers.</span>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button class="btn btn-primary" id="save-custom-instructions-btn">Save Instructions</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 4: MEMORY -->
+                        <div class="settings-pane" id="pane-memory">
+                            <h3>Saved Memory</h3>
+                            <p class="settings-sub">Opt-in remembered preferences allow InternBot to recall your target tech stack across sessions.</p>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>Enable Memory</strong>
+                                    <p class="text-muted">Allow the assistant to remember your internship goals and preferences.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-memory-enabled" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="memory-items-section">
+                                <h4>Saved Memory Items</h4>
+                                <div id="memory-items-list">
+                                    <p class="text-muted">No specific memories saved yet. Memories are created as you interact.</p>
+                                </div>
+
+                                <div class="add-memory-row">
+                                    <input type="text" id="new-mem-key" placeholder="Key (e.g. target_city)" class="form-input">
+                                    <input type="text" id="new-mem-val" placeholder="Value (e.g. Bangalore or Remote)" class="form-input">
+                                    <button class="btn btn-secondary btn-sm" id="add-memory-btn">Remember Item</button>
+                                </div>
+
+                                <button class="btn btn-outline btn-sm text-danger" id="clear-all-memory-btn">Clear All Memory</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 5: DATA CONTROLS -->
+                        <div class="settings-pane" id="pane-data-controls">
+                            <h3>Data Controls</h3>
+                            <p class="settings-sub">Export your data or manage your cloud stored records.</p>
+
+                            <div class="settings-card-item">
+                                <h4>📦 Export Your Data</h4>
+                                <p>Download a complete JSON export of your chat sessions, bookmarks, skill progress, and preferences.</p>
+                                <button class="btn btn-outline btn-sm" id="export-data-btn">Export Data (JSON)</button>
+                            </div>
+
+                            <div class="settings-card-item">
+                                <h4>💬 Chat History Management</h4>
+                                <p>Clear local temporary chat conversations without affecting saved database sessions.</p>
+                                <button class="btn btn-outline btn-sm" id="clear-local-chat-btn">Clear Local Chat</button>
+                            </div>
+
+                            <div class="settings-card-item danger-zone">
+                                <h4>🗑️ Delete Account & Personal Data</h4>
+                                <p>Permanently remove your profile, chat history, bookmarks, application tracker, and skill progress.</p>
+                                <button class="btn btn-danger btn-sm" id="delete-account-btn">Delete Account & Data</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 6: CHAT PREFERENCES -->
+                        <div class="settings-pane" id="pane-chat-prefs">
+                            <h3>Chat Preferences</h3>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>Press Enter to Send</strong>
+                                    <p class="text-muted">When enabled, pressing Enter sends your message. Press Shift+Enter for a new line.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-enter-to-send" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>Confirm Deletions</strong>
+                                    <p class="text-muted">Show a confirmation prompt before deleting saved sessions or applications.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-delete-confirm" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button class="btn btn-primary" id="save-chat-prefs-btn">Save Chat Preferences</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 7: NOTIFICATIONS -->
+                        <div class="settings-pane" id="pane-notifications">
+                            <h3>Notifications & Reminders</h3>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>In-App Reminders</strong>
+                                    <p class="text-muted">Display badges and alerts for upcoming deadlines and follow-up dates.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-notifications-enabled" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-group">
+                                <h4>Browser Desktop Notifications</h4>
+                                <p class="text-muted">Receive desktop notifications for application deadlines.</p>
+                                <button class="btn btn-secondary btn-sm" id="test-notification-btn">Test Notification</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 8: VOICE & ACCESSIBILITY -->
+                        <div class="settings-pane" id="pane-voice-access">
+                            <h3>Voice & Accessibility</h3>
+
+                            <div class="settings-group">
+                                <label for="setting-font-size">Font Size</label>
+                                <select id="setting-font-size" class="form-select">
+                                    <option value="small">Small (Compact UI)</option>
+                                    <option value="medium" selected>Medium (Standard)</option>
+                                    <option value="large">Large (High readability)</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>Reduced Motion</strong>
+                                    <p class="text-muted">Disable smooth transitions and animations for improved accessibility.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-reduced-motion">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div>
+                                    <strong>High Contrast Mode</strong>
+                                    <p class="text-muted">Increase border contrast and focus indicators.</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-high-contrast">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-actions">
+                                <button class="btn btn-primary" id="save-voice-access-btn">Save Accessibility Settings</button>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 9: CONNECTED SERVICES -->
+                        <div class="settings-pane" id="pane-connected-services">
+                            <h3>Connected Services</h3>
+
+                            <div class="service-card">
+                                <div class="service-info">
+                                    <span class="service-icon">🌐</span>
+                                    <div>
+                                        <h4>Google Account</h4>
+                                        <p id="google-service-status">Status: Guest session</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline btn-sm" id="google-service-action-btn">Sign In</button>
+                            </div>
+
+                            <div class="service-card">
+                                <div class="service-info">
+                                    <span class="service-icon">📅</span>
+                                    <div>
+                                        <h4>Calendar Integration</h4>
+                                        <p class="text-muted">Export application deadlines and interviews to Google Calendar or iCal.</p>
+                                    </div>
+                                </div>
+                                <span class="badge-neutral">Coming Soon</span>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 10: AI CONFIGURATION -->
+                        <div class="settings-pane" id="pane-ai-config">
+                            <h3>AI Configuration & Diagnostics</h3>
+
+                            <div class="settings-card-item">
+                                <h4>Google Gemini API Status</h4>
+                                <div id="gemini-status-badge" class="badge-status-neutral">Checking status...</div>
+                                <p id="gemini-status-desc" class="text-muted">Verifying backend configuration...</p>
+                                <div class="meta-box" id="gemini-status-meta"></div>
+                                <button class="btn btn-secondary btn-sm" id="test-gemini-btn">Run Real Connection Test</button>
+                            </div>
+
+                            <div class="settings-card-item">
+                                <h4>Offline FAQ Fallback System</h4>
+                                <p>When Gemini is unavailable or not configured in <code>.env</code>, our local 38-intent knowledge base seamlessly answers questions without disruptions.</p>
+                                <span class="badge-success">38 Verified Intents Active</span>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 11: PRIVACY & SECURITY -->
+                        <div class="settings-pane" id="pane-privacy-security">
+                            <h3>Privacy & Security</h3>
+                            <ul class="privacy-checklist">
+                                <li>✅ <strong>Zero Mandatory Logins:</strong> Guest users can freely browse roadmaps, search portals, and ask questions without providing any personal data.</li>
+                                <li>✅ <strong>Backend Key Protection:</strong> All API keys, Google credentials, and database operations are held securely on the backend server.</li>
+                                <li>✅ <strong>Strict User Isolation:</strong> SQLite queries enforce parameterized user-ownership checks (`user_id = ?`). One user cannot access another's chat sessions, bookmarks, or resume data.</li>
+                                <li>✅ <strong>In-Memory Resume Parsing:</strong> Resumes submitted to the ATS checker are processed strictly in-memory and are immediately cleared.</li>
+                            </ul>
+                        </div>
+
+                        <!-- SECTION 12: ACCOUNT -->
+                        <div class="settings-pane" id="pane-account">
+                            <h3>Account Details</h3>
+                            <div class="account-summary-card">
+                                <img id="account-avatar-large" class="large-avatar" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='18' font-size='18'>🎓</text></svg>" alt="Avatar">
+                                <div>
+                                    <h4 id="account-name-val">Guest Student</h4>
+                                    <p id="account-email-val">No account linked</p>
+                                    <span class="badge-neutral" id="account-status-badge">Guest Session</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 13: ABOUT -->
+                        <div class="settings-pane" id="pane-about">
+                            <h3>About Internship FAQ Assistant</h3>
+                            <div class="about-card">
+                                <div class="about-header">
+                                    <div class="brand-avatar">🎓</div>
+                                    <div>
+                                        <h4>InternBot Assistant Dashboard</h4>
+                                        <p class="text-muted">Version 2.5.0 Enterprise Upgrade</p>
+                                    </div>
+                                </div>
+                                <p>Comprehensive internship information system featuring offline FAQ matching, Gemini AI grounding, skill progress tracking, domain roadmaps for Java, Python, JavaScript, Full-Stack, topic MCQs, ATS resume analysis, and application tracking.</p>
+                                
+                                <div class="about-links">
+                                    <a href="https://internship.aicte-india.org/" target="_blank" rel="noopener noreferrer">🏛️ AICTE Portal</a>
+                                    <a href="https://careers.google.com/students/" target="_blank" rel="noopener noreferrer">🌐 Google Students</a>
+                                    <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">💼 LinkedIn Jobs</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL 1: IMAGE NOTICE ANALYZER -->
+    <div class="modal-overlay hidden" id="notice-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>🖼️ Upload Internship Notice or Flyer</h3>
+                <button class="icon-btn modal-close-btn" id="notice-modal-close" type="button">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Upload a screenshot or photo of an internship poster to check its legitimacy and extract dates, eligibility, and stipend details.</p>
+                
+                <div class="dropzone" id="notice-dropzone">
+                    <input type="file" id="notice-file-input" accept="image/png, image/jpeg, image/jpg, image/webp" hidden>
+                    <div class="dropzone-content">
+                        <span class="dropzone-icon">📁</span>
+                        <p><strong>Click to choose an image</strong> or drag and drop here</p>
+                        <span class="dropzone-hint">PNG, JPG, JPEG, WEBP up to 5MB</span>
+                    </div>
+                    <div class="preview-wrap hidden" id="preview-wrap">
+                        <img id="notice-preview-img" alt="Notice preview">
+                        <span class="preview-filename" id="preview-filename"></span>
+                    </div>
+                </div>
+
+                <div class="notice-analysis-output hidden" id="notice-analysis-output"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="notice-cancel-btn" type="button">Cancel</button>
+                <button class="btn btn-primary" id="notice-analyze-btn" type="button" disabled>Analyze Notice</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: ADD / EDIT APPLICATION -->
+    <div class="modal-overlay hidden" id="app-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="app-modal-title">Track Internship Application</h3>
+                <button class="icon-btn modal-close-btn" id="app-modal-close" type="button">✕</button>
+            </div>
+            <form id="app-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="app-company">Company Name *</label>
+                        <input type="text" id="app-company" class="form-input" placeholder="e.g. Google, Microsoft, Infosys" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-role">Role / Position *</label>
+                        <input type="text" id="app-role" class="form-input" placeholder="e.g. SDE Intern, Frontend Intern" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-url">Listing / Application URL</label>
+                        <input type="url" id="app-url" class="form-input" placeholder="https://careers.google.com/jobs/...">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-category">Category</label>
+                            <select id="app-category" class="form-select">
+                                <option value="Java Development">Java Development</option>
+                                <option value="Python Development">Python Development</option>
+                                <option value="JavaScript Development">JavaScript Development</option>
+                                <option value="Full-Stack Development">Full-Stack Development</option>
+                                <option value="General Software">General Software</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="app-status">Status</label>
+                            <select id="app-status" class="form-select">
+                                <option value="Saved">Saved</option>
+                                <option value="Applied">Applied</option>
+                                <option value="Assessment">Assessment</option>
+                                <option value="Interview">Interview</option>
+                                <option value="Offer">Offer</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="app-deadline">Deadline</label>
+                            <input type="date" id="app-deadline" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="app-followup">Follow-up Date</label>
+                            <input type="date" id="app-followup" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-notes">Notes / Requirements</label>
+                        <textarea id="app-notes" class="form-textarea" rows="2" placeholder="e.g. Round 1 coding challenge requires DSA in Java."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="app-modal-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="app-modal-submit">Save Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: ADD BOOKMARK -->
+    <div class="modal-overlay hidden" id="bookmark-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Bookmark Internship Listing</h3>
+                <button class="icon-btn modal-close-btn" id="bookmark-modal-close" type="button">✕</button>
+            </div>
+            <form id="bookmark-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="bm-company">Company Name *</label>
+                        <input type="text" id="bm-company" class="form-input" placeholder="e.g. Amazon" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bm-title">Internship Title *</label>
+                        <input type="text" id="bm-title" class="form-input" placeholder="e.g. Amazon WOW SDE Intern" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bm-url">URL</label>
+                        <input type="url" id="bm-url" class="form-input" placeholder="https://www.amazon.jobs/..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bm-category">Category</label>
+                        <select id="bm-category" class="form-select">
+                            <option value="Java Development">Java Development</option>
+                            <option value="Python Development">Python Development</option>
+                            <option value="JavaScript Development">JavaScript Development</option>
+                            <option value="Full-Stack Development">Full-Stack Development</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bm-notes">Notes</label>
+                        <input type="text" id="bm-notes" class="form-input" placeholder="e.g. Eligibility: 2nd or 3rd year female students">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="bookmark-modal-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Bookmark</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

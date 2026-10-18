@@ -1,0 +1,1107 @@
+{
+    "fallback": {
+        "answer": "I can help you with:\n• Official company career portals ([Google](https://careers.google.com/students/), [Microsoft](https://careers.microsoft.com/students/us/en), [Amazon](https://www.amazon.jobs/content/en/career-programs/student-programs), [IBM](https://www.ibm.com/careers/internships), [Infosys](https://www.infosys.com/careers/entry-level/in-step-internship.html), [TCS](https://www.tcs.com/careers/india/entry-level))\n• Internship categories (Software Engineering, Web Development, AI/ML, Data Science, Cybersecurity)\n• Complete Application Guide (eligibility, skills, documents, application steps, and selection processes)\n• Stipends, duration, certificates, and eligibility requirements\n\nTry asking a question or click one of the suggestions below!",
+        "suggestions": [
+            "Where can I apply?",
+            "Official internship websites?",
+            "Software internship",
+            "Application guide",
+            "Which internship is best for me?"
+        ]
+    },
+    "intents": [
+        {
+            "name": "greet",
+            "patterns": [
+                "hello",
+                "hi",
+                "hey",
+                "hii",
+                "good morning",
+                "good afternoon",
+                "good evening",
+                "namaste"
+            ],
+            "keywords": {},
+            "answer": "Hello! 👋 Welcome to the Internship FAQ Assistant.\nI can answer questions about applying, eligibility, documents, duration, stipend, certificates and which internship suits you. What would you like to know?",
+            "suggestions": [
+                "What is an internship?",
+                "How do I apply?",
+                "Which internship is best for me?",
+                "Is it paid?"
+            ]
+        },
+        {
+            "name": "goodbye",
+            "patterns": [
+                "bye",
+                "goodbye",
+                "see you",
+                "thank you bye",
+                "that is all"
+            ],
+            "keywords": {},
+            "answer": "Goodbye! Best of luck with your internship search. Come back any time. 🙂",
+            "suggestions": []
+        },
+        {
+            "name": "thanks",
+            "patterns": [
+                "thanks",
+                "thank you",
+                "thx",
+                "thanks a lot",
+                "great thanks"
+            ],
+            "keywords": {},
+            "answer": "You're welcome! Anything else you'd like to know about internships?",
+            "suggestions": [
+                "How do I apply?",
+                "Documents required",
+                "Certificate details"
+            ]
+        },
+        {
+            "name": "internship_info",
+            "patterns": [
+                "what is an internship",
+                "explain internship",
+                "meaning of internship",
+                "tell me about internships",
+                "why do an internship",
+                "benefits of internship",
+                "importance of internship"
+            ],
+            "keywords": {
+                "internship": 1,
+                "meaning": 3,
+                "define": 3,
+                "benefits": 3,
+                "importance": 3,
+                "why": 2,
+                "explain": 2,
+                "what": 1,
+                "about": 1
+            },
+            "answer": "An internship is a short, structured work experience (usually 1–6 months) where a student works with an organisation to learn real skills.\n\nWhy it helps:\n• Practical experience beyond classroom theory\n• A stronger resume and portfolio\n• Industry contacts and mentors\n• A route to pre-placement offers and full-time jobs",
+            "suggestions": [
+                "Who can apply?",
+                "How do I apply?",
+                "Which internship is best for me?"
+            ]
+        },
+        {
+            "name": "eligibility",
+            "patterns": [
+                "who can apply",
+                "eligibility criteria",
+                "am i eligible",
+                "eligible for internship",
+                "requirements to apply",
+                "minimum cgpa",
+                "which year students can apply",
+                "qualification needed"
+            ],
+            "keywords": {
+                "eligibility": 4,
+                "eligible": 4,
+                "qualification": 3,
+                "criteria": 3,
+                "requirement": 2,
+                "requirements": 2,
+                "cgpa": 3,
+                "percentage": 3,
+                "year": 1,
+                "who": 2,
+                "can": 1,
+                "apply": 1,
+                "branch": 2,
+                "semester": 2
+            },
+            "answer": "Eligibility depends on the company or program, but commonly:\n• Currently enrolled in a degree or diploma course (often B.Tech/BCA/MCA/BSc and similar)\n• Usually 2nd year onwards, though some programs accept 1st year\n• Relevant basic skills for the role\n• Some programs set a minimum CGPA or percentage\n\n⚠️ Exact criteria differ for each program. Always check the official listing or ask your internship coordinator.",
+            "suggestions": [
+                "How do I apply?",
+                "Documents required",
+                "What skills do I need?"
+            ]
+        },
+        {
+            "name": "application_process",
+            "patterns": [
+                "how do i apply",
+                "how to apply for internship",
+                "application process",
+                "application procedure",
+                "how to register",
+                "steps to apply",
+                "apply for internship",
+                "how can i join",
+                "how much to apply"
+            ],
+            "keywords": {
+                "apply": 3,
+                "application": 3,
+                "register": 3,
+                "registration": 3,
+                "procedure": 3,
+                "process": 2,
+                "steps": 3,
+                "join": 2,
+                "how": 1,
+                "enroll": 2,
+                "submit": 2
+            },
+            "answer": "Typical steps to apply:\n1. Find a suitable internship on the official portal, college placement cell or company careers page\n2. Check eligibility and the deadline\n3. Prepare your resume (and cover letter if asked)\n4. Fill in the online application form\n5. Upload the required documents\n6. Submit and note your application ID\n7. Prepare for a test or interview if shortlisted\n\nApply early, because deadlines are usually strict.",
+            "suggestions": [
+                "Documents required",
+                "Is there an application fee?",
+                "How is selection done?"
+            ]
+        },
+        {
+            "name": "required_documents",
+            "patterns": [
+                "documents required",
+                "which documents are needed",
+                "what documents do i need",
+                "required papers",
+                "documents for internship",
+                "what to upload"
+            ],
+            "keywords": {
+                "document": 4,
+                "documents": 4,
+                "papers": 3,
+                "upload": 2,
+                "attach": 2,
+                "certificates": 1,
+                "needed": 1,
+                "required": 1,
+                "id": 1,
+                "proof": 2,
+                "noc": 3
+            },
+            "answer": "Commonly required documents:\n• Updated resume / CV\n• College ID card or bonafide certificate\n• Latest marksheet or academic records\n• Photo ID (e.g. Aadhaar)\n• Passport-size photograph\n• NOC / permission letter from college (if required)\n• Portfolio, GitHub link or project details (for technical roles)\n\nThe exact list is set by each program, so confirm it in the official notice.",
+            "suggestions": [
+                "How do I apply?",
+                "How to write a good resume?",
+                "Who can apply?"
+            ]
+        },
+        {
+            "name": "duration",
+            "patterns": [
+                "how long is the internship",
+                "duration of internship",
+                "how many months",
+                "internship period",
+                "how many weeks",
+                "summer internship duration",
+                "length of internship"
+            ],
+            "keywords": {
+                "duration": 4,
+                "long": 2,
+                "months": 3,
+                "month": 3,
+                "weeks": 3,
+                "week": 3,
+                "period": 3,
+                "length": 3,
+                "time": 1,
+                "days": 2,
+                "summer": 2,
+                "timing": 2
+            },
+            "answer": "Internship duration varies by program:\n• Short-term / winter: 2–4 weeks\n• Summer internships: 6–8 weeks\n• Standard internships: 2–6 months\n• Long-term or semester-long: 6 months\n\nThe exact start date, end date and weekly hours are given in the offer letter.",
+            "suggestions": [
+                "Is it paid?",
+                "Will I get a certificate?",
+                "Can I work remotely?"
+            ]
+        },
+        {
+            "name": "stipend",
+            "patterns": [
+                "is internship paid",
+                "is it paid or unpaid",
+                "stipend details",
+                "how much stipend",
+                "salary for interns",
+                "do interns get paid",
+                "is internship free",
+                "internship payment"
+            ],
+            "keywords": {
+                "paid": 4,
+                "unpaid": 4,
+                "stipend": 4,
+                "salary": 3,
+                "payment": 3,
+                "pay": 3,
+                "money": 3,
+                "earn": 3,
+                "income": 2,
+                "remuneration": 3,
+                "free": 2
+            },
+            "answer": "It depends on the program:\n• Paid internships offer a monthly stipend (amount varies by company, role and city)\n• Unpaid internships give experience, mentoring and a certificate but no money\n• Some give a performance-based stipend or a pre-placement offer\n\nThe stipend is always stated in the official listing or offer letter. I don't want to guess an amount for you.",
+            "suggestions": [
+                "Is there an application fee?",
+                "Will I get a certificate?",
+                "How long is it?"
+            ]
+        },
+        {
+            "name": "fees",
+            "patterns": [
+                "is there an application fee",
+                "do i have to pay",
+                "registration fee",
+                "how much does it cost",
+                "internship cost",
+                "any charges",
+                "training fee"
+            ],
+            "keywords": {
+                "fee": 4,
+                "fees": 4,
+                "cost": 4,
+                "charges": 3,
+                "charge": 3,
+                "price": 3,
+                "pay": 1,
+                "costs": 4,
+                "cheap": 2,
+                "expensive": 2
+            },
+            "answer": "Genuine company internships do not normally charge students. Some training-based programs charge a course fee, and that should be clearly described.\n\n⚠️ Be careful: if someone asks for money to 'guarantee' an internship, verify the organisation first. Check the company website, reviews and your college placement cell before paying anything.",
+            "suggestions": [
+                "Is it paid?",
+                "How do I apply?",
+                "Who can apply?"
+            ]
+        },
+        {
+            "name": "application_status",
+            "patterns": [
+                "how do i check my application status",
+                "application status",
+                "track my application",
+                "did i get selected",
+                "when will i hear back",
+                "result of application",
+                "my application update"
+            ],
+            "keywords": {
+                "status": 4,
+                "track": 3,
+                "result": 3,
+                "update": 2,
+                "selected": 3,
+                "shortlisted": 3,
+                "waiting": 2,
+                "reply": 2,
+                "response": 2,
+                "check": 1
+            },
+            "answer": "To check your application status:\n• Log in to the portal where you applied and open 'My Applications'\n• Check your email (including spam) for updates\n• Contact the internship coordinator with your application ID\n\nI can't see individual student records, so please use the official portal for personal status.",
+            "suggestions": [
+                "How is selection done?",
+                "How do I apply?",
+                "Contact the coordinator"
+            ]
+        },
+        {
+            "name": "selection_process",
+            "patterns": [
+                "how is selection done",
+                "selection process",
+                "interview process",
+                "how are interns selected",
+                "will there be a test",
+                "interview questions",
+                "tips for interview"
+            ],
+            "keywords": {
+                "selection": 4,
+                "selected": 2,
+                "interview": 4,
+                "test": 3,
+                "shortlist": 3,
+                "rounds": 3,
+                "screening": 3,
+                "hiring": 2,
+                "assessment": 3,
+                "tips": 1
+            },
+            "answer": "A typical selection process:\n1. Resume screening\n2. Online test or assignment (aptitude / technical)\n3. Technical or HR interview\n4. Offer letter\n\nInterview tips:\n• Know every project on your resume in depth\n• Revise core basics of your field\n• Be ready to explain why you want this role\n• Keep a short list of questions to ask them",
+            "suggestions": [
+                "How to write a good resume?",
+                "What skills do I need?",
+                "How do I apply?"
+            ]
+        },
+        {
+            "name": "certificate",
+            "patterns": [
+                "will i get a certificate",
+                "internship certificate",
+                "completion certificate",
+                "offer letter",
+                "letter of recommendation",
+                "do i get a certificate",
+                "certificate details"
+            ],
+            "keywords": {
+                "certificate": 5,
+                "certification": 4,
+                "certified": 3,
+                "completion": 3,
+                "offer": 2,
+                "letter": 3,
+                "lor": 3,
+                "recommendation": 3,
+                "proof": 1
+            },
+            "answer": "Most internships issue a completion certificate once you finish the program successfully.\n\nCommon conditions:\n• Complete the full duration\n• Submit assigned tasks, projects or reports\n• Meet attendance / performance requirements\n\nSome companies also give a letter of recommendation or an experience letter for strong performers. Check the program guidelines for specifics.",
+            "suggestions": [
+                "How long is it?",
+                "Is it paid?",
+                "Who can apply?"
+            ]
+        },
+        {
+            "name": "best_internship",
+            "patterns": [
+                "which internship is best",
+                "best internship for me",
+                "what internship should i choose",
+                "career options",
+                "which field to choose",
+                "suggest an internship",
+                "internship for computer science student",
+                "how is best internship"
+            ],
+            "keywords": {
+                "best": 4,
+                "suggest": 3,
+                "recommend": 3,
+                "choose": 3,
+                "which": 2,
+                "career": 3,
+                "field": 2,
+                "option": 2,
+                "options": 2,
+                "me": 1,
+                "should": 2,
+                "right": 1,
+                "good": 2,
+                "top": 3
+            },
+            "answer": "The best internship depends on your interests and skills. Popular options for students:\n• Software Development: strong programming and problem solving\n• Web Development: HTML, CSS, JavaScript, React, Flask or Node\n• Data Science / Analytics: Python, SQL, statistics, visualisation\n• AI / Machine Learning: Python, ML basics, projects\n• Cyber Security, Cloud, UI/UX, Digital Marketing\n\nTell me which area interests you (for example 'data science' or 'web development') and I'll tell you what to expect and which skills to build.",
+            "suggestions": [
+                "Software engineering internship",
+                "Data science internship",
+                "Web development internship",
+                "AI / ML internship"
+            ]
+        },
+        {
+            "name": "software_engineering",
+            "patterns": [
+                "software engineering internship",
+                "software developer internship",
+                "sde internship",
+                "coding internship",
+                "programming internship",
+                "software engineering",
+                "software engineer intern",
+                "software internship",
+                "software internships",
+                "software engineer internship",
+                "coding internships",
+                "sde openings"
+            ],
+            "keywords": {
+                "software": 6,
+                "engineering": 3,
+                "developer": 3,
+                "development": 2,
+                "sde": 6,
+                "coding": 4,
+                "programming": 4,
+                "backend": 3,
+                "engineer": 3
+            },
+            "answer": "Software Engineering Internship 💻\n\n**What you'll do:**\n• Write, test, and maintain code for real-world products\n• Fix bugs, write unit tests, and review code with mentors\n• Work with Git, REST APIs, databases, and microservices\n\n**Skills to build:**\n• Master one language: Python, Java, C++, or JavaScript\n• Data Structures and Algorithms (Arrays, Trees, Graphs, DP)\n• Git/GitHub, SQL, and Object-Oriented Design (OOP)\n• 2–3 solid projects deployed on GitHub\n\n**Official Portals to Apply:**\n• [Google Careers (Students)](https://careers.google.com/students/)\n• [Microsoft Student Programs](https://careers.microsoft.com/students/us/en)\n• [Amazon Student Programs](https://www.amazon.jobs/content/en/career-programs/student-programs)\n• [AICTE Internship Portal](https://internship.aicte-india.org/)\n\n*Roles: SDE Intern, Backend Intern, Full-Stack Intern, QA/Automation Intern.*",
+            "suggestions": [
+                "Official internship websites?",
+                "Where can I apply?",
+                "Application guide",
+                "What skills do I need?"
+            ]
+        },
+        {
+            "name": "data_science",
+            "patterns": [
+                "data science internship",
+                "data analyst internship",
+                "data analytics internship",
+                "data science",
+                "data analyst intern",
+                "data analyst internships",
+                "data analytics intern",
+                "business analyst internship",
+                "data science internships"
+            ],
+            "keywords": {
+                "data": 3,
+                "science": 3,
+                "analyst": 4,
+                "analytics": 4,
+                "statistics": 3,
+                "pandas": 3,
+                "visualization": 3,
+                "sql": 2,
+                "bi": 2,
+                "scientist": 3
+            },
+            "answer": "Data Science & Analytics Internship 📊\n\n**What you'll do:**\n• Query enterprise databases with SQL to clean and aggregate raw data\n• Build executive dashboards and visual reports in Power BI or Tableau\n• Apply statistical analysis and machine learning to forecast business metrics\n\n**Skills to build:**\n• Python (Pandas, NumPy, Matplotlib, Seaborn) & Advanced SQL\n• Business Intelligence: Power BI, Tableau, or Advanced Excel\n• Statistical modeling, hypothesis testing, and A/B testing\n• Scikit-learn for predictive analytics\n\n**Official Portals to Apply:**\n• [Amazon Student Programs](https://www.amazon.jobs/content/en/career-programs/student-programs)\n• [IBM Internships](https://www.ibm.com/careers/internships)\n• [Infosys InStep](https://www.infosys.com/careers/entry-level/in-step-internship.html)\n• [TCS Careers](https://www.tcs.com/careers/india/entry-level)",
+            "suggestions": [
+                "AI / ML internship",
+                "Official internship websites?",
+                "Where can I apply?",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "ai_ml",
+            "patterns": [
+                "ai ml internship",
+                "machine learning internship",
+                "artificial intelligence internship",
+                "deep learning internship",
+                "ai internship",
+                "nlp internship",
+                "skills for ai internship",
+                "ai internship",
+                "ml internship",
+                "machine learning internships",
+                "genai internship",
+                "deep learning intern"
+            ],
+            "keywords": {
+                "ai": 6,
+                "ml": 6,
+                "machine": 3,
+                "learning": 3,
+                "artificial": 3,
+                "intelligence": 3,
+                "deep": 2,
+                "nlp": 3,
+                "neural": 3,
+                "tensorflow": 3,
+                "pytorch": 3,
+                "chatbot": 2
+            },
+            "answer": "AI / Machine Learning Internship 🤖\n\n**What you'll do:**\n• Prepare, clean, and preprocess large datasets for model training\n• Train, evaluate, and fine-tune machine learning and deep learning models\n• Build intelligent applications (chatbots, computer vision, recommendation systems)\n\n**Skills to build:**\n• Python, NumPy, Pandas, Scikit-learn\n• Deep Learning: PyTorch or TensorFlow\n• Math foundations: Linear algebra, probability, and calculus\n• LLMs, Prompt Engineering, and RAG architectures\n• 1–2 end-to-end deployed projects on Hugging Face or Streamlit\n\n**Official Portals to Apply:**\n• [Google AI & Research Students](https://careers.google.com/students/)\n• [IBM Internships (watsonx & AI)](https://www.ibm.com/careers/internships)\n• [Kaggle Competitions & Jobs](https://www.kaggle.com/)\n• [Amazon Student Programs](https://www.amazon.jobs/content/en/career-programs/student-programs)",
+            "suggestions": [
+                "Data science internship",
+                "Official internship websites?",
+                "Software internship",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "web_development",
+            "patterns": [
+                "web development internship",
+                "frontend internship",
+                "full stack internship",
+                "web developer intern",
+                "html css javascript internship",
+                "react internship",
+                "web dev internship",
+                "web internships",
+                "frontend developer intern",
+                "backend developer intern",
+                "full stack intern"
+            ],
+            "keywords": {
+                "web": 4,
+                "frontend": 4,
+                "front": 2,
+                "fullstack": 4,
+                "full": 1,
+                "stack": 2,
+                "html": 3,
+                "css": 3,
+                "javascript": 3,
+                "react": 3,
+                "website": 3,
+                "flask": 2,
+                "node": 2,
+                "ui": 2,
+                "ux": 2
+            },
+            "answer": "Web Development Internship 🌐\n\n**What you'll do:**\n• Build responsive, interactive web interfaces and full-stack web applications\n• Connect frontend components to backend REST / GraphQL APIs\n• Integrate databases, optimize page load speed, and fix UI bugs\n\n**Skills to build:**\n• HTML5, CSS3, modern JavaScript (ES6+)\n• Frontend framework: React, Vue, or Next.js\n• Backend: Node.js/Express, Python/Flask, or Django\n• Databases: PostgreSQL, MongoDB, or MySQL\n• Git, GitHub, and deployment (Vercel, Render, AWS)\n\n**Official Portals to Apply:**\n• [Internshala Web Dev Internships](https://internshala.com/)\n• [LinkedIn Student Jobs](https://www.linkedin.com/jobs/internship-jobs/)\n• [Google Careers](https://careers.google.com/students/)\n• [Infosys InStep](https://www.infosys.com/careers/entry-level/in-step-internship.html)",
+            "suggestions": [
+                "Software internship",
+                "Where can I apply?",
+                "Application guide",
+                "How do I apply?"
+            ]
+        },
+        {
+            "name": "skills",
+            "patterns": [
+                "what skills do i need",
+                "skills required for internship",
+                "which skills should i learn",
+                "how to prepare for internship",
+                "what should i learn",
+                "skills needed"
+            ],
+            "keywords": {
+                "skills": 4,
+                "skill": 4,
+                "learn": 3,
+                "prepare": 3,
+                "preparation": 3,
+                "need": 1,
+                "required": 1,
+                "improve": 2,
+                "tools": 2,
+                "technologies": 2
+            },
+            "answer": "Skills most internships look for:\n\nGeneral:\n• Communication and teamwork\n• Willingness to learn, time management\n• Problem solving\n\nTechnical (depends on field):\n• Programming (Python / Java / JavaScript)\n• Git and GitHub\n• SQL and databases\n• Basic data structures and algorithms\n\nTip: build 2–3 small projects. They matter more than a long list of skills.",
+            "suggestions": [
+                "Software engineering internship",
+                "Data science internship",
+                "How to write a good resume?"
+            ]
+        },
+        {
+            "name": "resume",
+            "patterns": [
+                "how to write a good resume",
+                "resume tips",
+                "cv for internship",
+                "cover letter",
+                "resume format",
+                "build my resume"
+            ],
+            "keywords": {
+                "resume": 5,
+                "cv": 4,
+                "cover": 3,
+                "portfolio": 3,
+                "linkedin": 3,
+                "github": 2,
+                "format": 2
+            },
+            "answer": "A strong internship resume:\n• One page, clean format, no photo unless asked\n• Header: name, email, phone, LinkedIn, GitHub\n• Education with CGPA / percentage\n• Projects with what you built, tools used and the result\n• Skills grouped by category\n• Achievements, certifications, positions of responsibility\n\nUse action verbs ('Built', 'Designed') and numbers where possible. Proofread twice!",
+            "suggestions": [
+                "Documents required",
+                "How is selection done?",
+                "What skills do I need?"
+            ]
+        },
+        {
+            "name": "remote",
+            "patterns": [
+                "can i work remotely",
+                "work from home internship",
+                "online internship",
+                "remote internship",
+                "virtual internship",
+                "onsite or remote"
+            ],
+            "keywords": {
+                "remote": 4,
+                "remotely": 4,
+                "online": 3,
+                "virtual": 3,
+                "home": 2,
+                "wfh": 4,
+                "onsite": 3,
+                "office": 2,
+                "hybrid": 3,
+                "location": 2
+            },
+            "answer": "Internships come in three modes:\n• On-site: you work from the company office\n• Remote / virtual: fully online\n• Hybrid: a mix of both\n\nThe mode is mentioned in each listing. Remote internships are good for flexibility, while on-site ones offer more mentoring and networking.",
+            "suggestions": [
+                "How long is it?",
+                "Is it paid?",
+                "How do I apply?"
+            ]
+        },
+        {
+            "name": "deadline",
+            "patterns": [
+                "what is the last date to apply",
+                "application deadline",
+                "when do applications open",
+                "last date",
+                "closing date"
+            ],
+            "keywords": {
+                "deadline": 4,
+                "date": 3,
+                "last": 2,
+                "closing": 3,
+                "open": 2,
+                "when": 2,
+                "dates": 3,
+                "schedule": 3,
+                "timeline": 3
+            },
+            "answer": "Deadlines differ for every program, so I can't give you one exact date. You'll find it on the official internship notice or portal.\n\nTips:\n• Apply at least a few days before the last date\n• Keep documents ready in advance\n• Enable email notifications for new openings",
+            "suggestions": [
+                "How do I apply?",
+                "Documents required",
+                "Application status"
+            ]
+        },
+        {
+            "name": "contact",
+            "patterns": [
+                "contact the coordinator",
+                "who do i contact",
+                "help desk",
+                "talk to a person",
+                "email support",
+                "need human help",
+                "contact details"
+            ],
+            "keywords": {
+                "contact": 4,
+                "coordinator": 4,
+                "support": 3,
+                "helpdesk": 4,
+                "human": 3,
+                "person": 2,
+                "email": 2,
+                "phone": 2,
+                "call": 2,
+                "help": 1,
+                "mail": 2
+            },
+            "answer": "For personal or program-specific help, please reach out to:\n• Your college internship / placement coordinator\n• The support email listed on the official internship portal\n\nInclude your name, course, and application ID so they can help you faster.",
+            "suggestions": [
+                "Application status",
+                "How do I apply?",
+                "Documents required"
+            ]
+        },
+        {
+            "name": "official_portals",
+            "patterns": [
+                "where can i apply",
+                "where can i apply?",
+                "where can i apply for internships",
+                "where can i apply for internship",
+                "official internship websites",
+                "official internship websites?",
+                "official internship website",
+                "official internship portals",
+                "official internship portal",
+                "official portals",
+                "internship websites",
+                "internship portals",
+                "where to find internships",
+                "where to apply",
+                "company career portals",
+                "company internship websites",
+                "top internship websites",
+                "websites for internship",
+                "list of internship websites"
+            ],
+            "keywords": {
+                "where": 3,
+                "apply": 4,
+                "websites": 5,
+                "website": 5,
+                "portals": 5,
+                "portal": 5,
+                "official": 4,
+                "companies": 3,
+                "company": 3,
+                "links": 3
+            },
+            "answer": "Official Company & Internship Portals 🌐\n\nHere are the verified official portals to find and apply for genuine internships:\n\n**Top Tech Company Portals:**\n• [Google Careers (Students)](https://careers.google.com/students/) — STEP internships, SWE summer internships, and research roles.\n• [Microsoft Student Programs](https://careers.microsoft.com/students/us/en) — Explore Microsoft (1st/2nd year) and Software Engineering internships.\n• [Amazon Student Programs](https://www.amazon.jobs/content/en/career-programs/student-programs) — SDE Internships, Cloud/AWS, and Amazon WOW (for women in tech).\n• [IBM Internships](https://www.ibm.com/careers/internships) — Software development, watsonx AI, Cloud, and Cybersecurity student positions.\n• [Infosys InStep](https://www.infosys.com/careers/entry-level/in-step-internship.html) — Ranked #1 global internship program for technology and consulting.\n• [TCS Careers (Entry-Level)](https://www.tcs.com/careers/india/entry-level) — TCS NextStep, Ignite, and academic internships.\n\n**Verified Student Portals:**\n• [AICTE Internship Portal](https://internship.aicte-india.org/) — Government-recognized internships across India in tech, government, and corporate sectors.\n• [Internshala](https://internshala.com/) — Large marketplace for startup, remote, and corporate internships with verified stipends.",
+            "suggestions": [
+                "Application guide",
+                "Software internship",
+                "Cybersecurity internship",
+                "How do I apply?"
+            ]
+        },
+        {
+            "name": "cybersecurity",
+            "patterns": [
+                "cybersecurity internship",
+                "cybersecurity internships",
+                "cyber security internship",
+                "cyber security internships",
+                "cybersecurity",
+                "cyber security",
+                "ethical hacking internship",
+                "information security internship",
+                "infosec internship",
+                "security analyst intern",
+                "soc analyst internship",
+                "penetration testing internship"
+            ],
+            "keywords": {
+                "cybersecurity": 6,
+                "cyber": 5,
+                "security": 5,
+                "hacking": 4,
+                "ethical": 4,
+                "infosec": 5,
+                "soc": 4,
+                "network": 2
+            },
+            "answer": "Cybersecurity Internship 🛡️\n\n**What you'll do:**\n• Conduct vulnerability assessments and assist in penetration testing\n• Monitor security alerts in SOC (Security Operations Center) and analyze threat logs\n• Inspect network traffic using tools like Wireshark, Nmap, and Burp Suite\n• Help configure firewalls, identify OWASP Top 10 vulnerabilities, and draft security reports\n\n**Skills to build:**\n• Networking fundamentals (TCP/IP, OSI model, DNS, subnetting) & Linux command-line\n• Python or Bash scripting for security automation\n• Web application security (OWASP Top 10) & basic cryptography\n• Helpful certifications: CompTIA Security+, CEH, or Cisco Certified CyberOps\n\n**Where to apply:**\n• [IBM Security Internships](https://www.ibm.com/careers/internships)\n• [TCS Careers (Cyber Security)](https://www.tcs.com/careers/india/entry-level)\n• [AICTE Internship Portal (Cyber Security)](https://internship.aicte-india.org/)\n• [Internshala Security Internships](https://internshala.com/)",
+            "suggestions": [
+                "Official internship websites?",
+                "Software internship",
+                "Where can I apply?",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "application_guide",
+            "patterns": [
+                "application guide",
+                "internship application guide",
+                "how to get an internship",
+                "complete internship guide",
+                "complete guide",
+                "step by step guide",
+                "how to prepare and apply",
+                "internship preparation guide",
+                "guide for internship",
+                "how do i prepare for internships",
+                "full internship guide"
+            ],
+            "keywords": {
+                "guide": 6,
+                "step": 4,
+                "steps": 4,
+                "complete": 4,
+                "prepare": 4,
+                "preparation": 4,
+                "how": 2,
+                "get": 2
+            },
+            "answer": "Complete Step-by-Step Internship Application Guide 📋\n\n**1. Eligibility Check:**\n• Open to students enrolled in Bachelor's, Master's, or Diploma degrees (B.Tech, BCA, MCA, BSc, etc.).\n• Most tech companies accept 2nd, 3rd, and final year students (early programs like Google STEP accept 1st and 2nd years).\n• Maintain a 60%+ or 6.5+ CGPA to satisfy company eligibility filters.\n\n**2. Required Skills:**\n• Master one programming language (Python, Java, C++, or JavaScript).\n• Strong grasp of Data Structures, Algorithms, and Git/GitHub.\n• Build 2–3 end-to-end, functional projects that solve real problems.\n\n**3. Required Documents:**\n• Updated 1-page resume (with clickable GitHub & LinkedIn links).\n• College ID / Bonafide Certificate and latest academic marksheets.\n• Photo ID (Aadhaar / Passport) and NOC from college if required.\n\n**4. Application Steps:**\n• Apply directly through official portals: [Google](https://careers.google.com/students/), [Microsoft](https://careers.microsoft.com/students/us/en), [Amazon](https://www.amazon.jobs/content/en/career-programs/student-programs), [IBM](https://www.ibm.com/careers/internships), [Infosys](https://www.infosys.com/careers/entry-level/in-step-internship.html), [TCS](https://www.tcs.com/careers/india/entry-level), or [AICTE](https://internship.aicte-india.org/).\n• Submit early (applications often close once interview quotas are reached).\n• Save your application tracking ID and check your email regularly.\n\n**5. Selection Process:**\n• Resume Screening ➔ Online Coding & Aptitude Test ➔ Technical Round ➔ HR / Behavioral Interview ➔ Offer Letter.",
+            "suggestions": [
+                "Official internship websites?",
+                "Where can I apply?",
+                "Software internship",
+                "How to write a good resume?"
+            ]
+        },
+        {
+            "name": "google_internship",
+            "patterns": [
+                "google internship",
+                "google internships",
+                "google step",
+                "google step internship",
+                "how to apply for google internship",
+                "google careers students",
+                "google student program"
+            ],
+            "keywords": {
+                "google": 6,
+                "step": 4
+            },
+            "answer": "Google Student & Internship Opportunities 🌐\n\nGoogle offers several world-renowned internship pathways for students:\n\n• **STEP (Student Training in Engineering Program)**: For 1st and 2nd-year undergraduate students with a passion for computer science. Features mentorship and collaborative software development.\n• **Software Engineering (SWE) Internship**: 12–14 week summer internships for 3rd and final-year students working on Google's core products and infrastructure.\n• **Research & AI Internships**: Focuses on cutting-edge machine learning and natural language processing.\n\n**How to apply:**\n• Search active student openings at [Google Careers (Students)](https://careers.google.com/students/).\n• Prepare Data Structures & Algorithms (LeetCode Medium) and ensure your resume showcases real technical projects.",
+            "suggestions": [
+                "Official internship websites?",
+                "Software internship",
+                "Application guide",
+                "How is selection done?"
+            ]
+        },
+        {
+            "name": "microsoft_internship",
+            "patterns": [
+                "microsoft internship",
+                "microsoft internships",
+                "microsoft explore",
+                "how to apply for microsoft internship",
+                "microsoft student programs",
+                "microsoft swe intern"
+            ],
+            "keywords": {
+                "microsoft": 6,
+                "explore": 4
+            },
+            "answer": "Microsoft Student Opportunities 💻\n\nMicrosoft hires students across various stages of their degrees:\n\n• **Explore Microsoft**: Rotational 12-week summer internship for 1st and 2nd-year students, giving exposure to both Software Engineering and Product Management.\n• **Software Engineering (SWE) Internship**: For pre-final and final-year students to develop cloud, OS, web, and AI features on Azure, Windows, and Office.\n• **Data & Applied Science Internships**: Focuses on data pipelines and machine learning intelligence.\n\n**How to apply:**\n• Submit your application directly on [Microsoft Student Programs](https://careers.microsoft.com/students/us/en).\n• Emphasize OOP concepts, algorithms, GitHub projects, and your collaborative mindset.",
+            "suggestions": [
+                "Official internship websites?",
+                "Where can I apply?",
+                "Application guide",
+                "Software internship"
+            ]
+        },
+        {
+            "name": "amazon_internship",
+            "patterns": [
+                "amazon internship",
+                "amazon internships",
+                "amazon wow",
+                "amazon student programs",
+                "how to apply for amazon internship",
+                "amazon sde intern"
+            ],
+            "keywords": {
+                "amazon": 6,
+                "wow": 4
+            },
+            "answer": "Amazon Student Programs 📦\n\nAmazon offers large-scale student hiring programs globally:\n\n• **Amazon SDE Internships**: 2–6 month roles developing scalable distributed systems, e-commerce features, and AWS cloud services.\n• **Amazon WOW (Women Out Working)**: A specialized mentorship and coding recruitment initiative dedicated to women engineering students in India.\n• **Applied Science & ML Internships**: Advanced modeling in predictive analytics, search, and generative AI.\n\n**How to apply:**\n• Apply directly on [Amazon Student Programs](https://www.amazon.jobs/content/en/career-programs/student-programs).\n• Practice coding assessments (HackerRank/LeetCode) and familiarize yourself with Amazon's 16 Leadership Principles.",
+            "suggestions": [
+                "Official internship websites?",
+                "Software internship",
+                "Where can I apply?",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "ibm_internship",
+            "patterns": [
+                "ibm internship",
+                "ibm internships",
+                "how to apply for ibm internship",
+                "ibm student opportunities",
+                "ibm careers"
+            ],
+            "keywords": {
+                "ibm": 6
+            },
+            "answer": "IBM Student & Graduate Internships 🔷\n\nIBM offers hands-on internships across enterprise technology:\n\n• **Software Developer Internships**: Enterprise applications, microservices, cloud systems, and open-source software.\n• **Data & AI Internships**: Build real AI applications with IBM watsonx and enterprise analytics.\n• **IBM Security & Quantum**: Research and engineering in cybersecurity threat response and quantum computing.\n\n**How to apply:**\n• Explore student openings on [IBM Internships](https://www.ibm.com/careers/internships).\n• Highlight coursework, GitHub projects, and cloud/AI certifications in your application.",
+            "suggestions": [
+                "Official internship websites?",
+                "Cybersecurity internship",
+                "AI / ML internship",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "infosys_internship",
+            "patterns": [
+                "infosys internship",
+                "infosys instep",
+                "how to apply for infosys internship",
+                "infosys careers",
+                "infosys springboard"
+            ],
+            "keywords": {
+                "infosys": 6,
+                "instep": 5,
+                "springboard": 4
+            },
+            "answer": "Infosys InStep & Student Programs 🏢\n\nInfosys provides industry-recognized student programs:\n\n• **Infosys InStep**: Consistently ranked the #1 internship program in the world by Vault. Interns work directly with senior mentors on real tech and consulting projects.\n• **Infosys Springboard**: Digital learning and project-based internships providing free industry certifications for Indian college students.\n• **Summer & Winter Tech Internships**: Hands-on project training across cloud, AI, and enterprise tech.\n\n**How to apply:**\n• Apply online on the official [Infosys InStep Portal](https://www.infosys.com/careers/entry-level/in-step-internship.html) or through university placement drives.",
+            "suggestions": [
+                "Official internship websites?",
+                "Where can I apply?",
+                "Application guide",
+                "Documents required"
+            ]
+        },
+        {
+            "name": "tcs_internship",
+            "patterns": [
+                "tcs internship",
+                "tcs internships",
+                "tcs nextstep",
+                "how to apply for tcs internship",
+                "tcs careers",
+                "tcs ignite"
+            ],
+            "keywords": {
+                "tcs": 6,
+                "nextstep": 5,
+                "ignite": 4
+            },
+            "answer": "TCS NextStep & Student Internships 💼\n\nTata Consultancy Services offers structured entry pathways for college students:\n\n• **TCS Academic Internships**: Available for students in B.Tech, M.Tech, BCA, and MCA to fulfill degree project requirements under industry guides.\n• **TCS NextStep & NQT**: National Qualifier Test leading to Ninja and Digital hiring tracks with internship conversion opportunities.\n• **TCS Research Internships**: Advanced research roles in AI, robotics, cybersecurity, and IoT.\n\n**How to apply:**\n• Register and apply on [TCS Careers (Entry-Level)](https://www.tcs.com/careers/india/entry-level) and the TCS NextStep portal.",
+            "suggestions": [
+                "Official internship websites?",
+                "Where can I apply?",
+                "How is selection done?",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "java_internship",
+            "patterns": [
+                "java internship",
+                "java internships",
+                "core java internship",
+                "spring boot internship",
+                "java developer intern",
+                "how to get java internship",
+                "java roadmap",
+                "java projects",
+                "java"
+            ],
+            "keywords": {
+                "java": 6,
+                "spring": 5,
+                "boot": 4,
+                "jdbc": 4,
+                "collections": 4,
+                "backend": 3
+            },
+            "answer": "Java Development Internship ☕\n\n**Core Skills to Learn:**\n• Core Java, OOP (Encapsulation, Inheritance, Polymorphism, Abstraction)\n• Collections Framework (List, Set, Map), Generics, and Exception Handling\n• JDBC, SQL Queries, and Spring Data JPA / Hibernate\n• Spring Boot (REST APIs, Dependency Injection, Controller/Service/Repository pattern)\n• Git/GitHub and Unit Testing with JUnit\n\n**Recommended Projects for Resume:**\n1. **Student Management System**: Core Java, JDBC, and MySQL for student enrollment, GPA, and course records.\n2. **Hotel Reservation System**: Spring Boot REST API for room bookings, availability search, and billing.\n3. **Library Management System**: Spring Boot + React or Thymeleaf for book cataloging and late-fee calculation.\n\n**External Search Link:**\n• [LinkedIn Java Internships](https://www.linkedin.com/jobs/java-intern-jobs/) *(External job-search link; confirm vacancies on official company portals)*",
+            "suggestions": [
+                "Java roadmap",
+                "Python internship",
+                "Full-Stack internship",
+                "Resume checker"
+            ]
+        },
+        {
+            "name": "python_internship",
+            "patterns": [
+                "python internship",
+                "python internships",
+                "python developer intern",
+                "flask internship",
+                "django internship",
+                "python backend intern",
+                "python roadmap",
+                "python projects",
+                "python"
+            ],
+            "keywords": {
+                "python": 6,
+                "flask": 5,
+                "django": 5,
+                "automation": 4,
+                "pytest": 4,
+                "backend": 3
+            },
+            "answer": "Python Development Internship 🐍\n\n**Core Skills to Learn:**\n• Python Fundamentals, OOP, Data Structures, List/Dict Comprehensions\n• File Handling (JSON, CSV) and Custom Exception Handling\n• Web Frameworks: Flask or Django with SQLite / PostgreSQL\n• REST API endpoints, automated unit testing with PyTest, and Git\n\n**Recommended Projects for Resume:**\n1. **FAQ Chatbot & Knowledge Assistant**: Flask, NLP intent scoring, and SQLite.\n2. **Automation & Web Scraping Tool**: Python + BeautifulSoup for monitoring career portals.\n3. **RESTful API Backend**: FastAPI / Flask with JWT authentication and documentation.\n4. **Smart File Organizer**: Automation script sorting downloads by file type and date.\n\n**External Search Link:**\n• [LinkedIn Python Internships](https://www.linkedin.com/jobs/python-intern-jobs/) *(External job-search link; confirm vacancies on official company portals)*",
+            "suggestions": [
+                "Python roadmap",
+                "Java internship",
+                "AI / ML internship",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "javascript_internship",
+            "patterns": [
+                "javascript internship",
+                "javascript internships",
+                "frontend internship",
+                "react internship",
+                "js developer intern",
+                "javascript roadmap",
+                "javascript projects",
+                "javascript"
+            ],
+            "keywords": {
+                "javascript": 6,
+                "js": 5,
+                "react": 5,
+                "frontend": 4,
+                "es6": 4,
+                "dom": 4
+            },
+            "answer": "JavaScript Development Internship ⚡\n\n**Core Skills to Learn:**\n• Modern ES6+ (Arrow functions, Destructuring, Spread, Array map/filter/reduce)\n• DOM Manipulation, Event Loop, Promises, and Async/Await with Fetch API\n• React Fundamentals (Components, Props, Hooks: useState, useEffect)\n• Node.js, Express basics, npm, Vite, and Git\n\n**Recommended Projects for Resume:**\n1. **Weather App with Geolocation**: React / Vanilla JS with async API integration.\n2. **Task Manager (Kanban Board)**: Drag-and-drop task tracking with localStorage.\n3. **Student Analytics Dashboard**: Chart.js / Recharts visualization of application metrics.\n\n**External Search Link:**\n• [LinkedIn JavaScript Internships](https://www.linkedin.com/jobs/javascript-intern-jobs/) *(External job-search link; confirm vacancies on official company portals)*",
+            "suggestions": [
+                "JavaScript roadmap",
+                "Full-Stack internship",
+                "Where can I apply?",
+                "Resume checker"
+            ]
+        },
+        {
+            "name": "fullstack_internship",
+            "patterns": [
+                "full stack internship",
+                "fullstack internship",
+                "full stack developer intern",
+                "fullstack developer",
+                "mern stack internship",
+                "full stack roadmap",
+                "full stack projects",
+                "full stack"
+            ],
+            "keywords": {
+                "fullstack": 6,
+                "stack": 5,
+                "mern": 5,
+                "frontend": 3,
+                "backend": 4,
+                "database": 4
+            },
+            "answer": "Full-Stack Development Internship 🌐\n\n**Core Skills to Learn:**\n• Frontend: HTML5, CSS3, modern JavaScript, and React\n• Backend: Node.js/Express, Java/Spring Boot, or Python/Flask\n• Databases: MySQL / PostgreSQL (Relational) or MongoDB (Document)\n• Security: JWT Authentication, Password Hashing (bcrypt), CORS\n• Deployment: Docker basics, Vercel/Render hosting, and CI/CD\n\n**Recommended Projects for Resume:**\n1. **Job & Internship Portal**: Dual-role system for candidates applying and recruiters managing.\n2. **Internship Platform & Prep Dashboard**: Full dashboard with skill roadmaps, MCQs, and tracker.\n3. **Hotel Booking System**: End-to-end e-commerce booking with room filters and invoice generation.\n\n**External Search Link:**\n• [LinkedIn Full-Stack Internships](https://www.linkedin.com/jobs/full-stack-developer-intern-jobs/) *(External job-search link; confirm vacancies on official company portals)*",
+            "suggestions": [
+                "Full-Stack roadmap",
+                "Java internship",
+                "Python internship",
+                "Application guide"
+            ]
+        },
+        {
+            "name": "resume_checker_faq",
+            "patterns": [
+                "resume checker",
+                "check my resume",
+                "ats resume",
+                "resume review",
+                "how to improve resume",
+                "ats score",
+                "resume tips"
+            ],
+            "keywords": {
+                "resume": 6,
+                "checker": 5,
+                "ats": 5,
+                "score": 4,
+                "cv": 4
+            },
+            "answer": "ATS Resume Checker & Optimization 📄\n\n**Key Guidelines for a Recruiter-Ready Resume:**\n1. **Quantify Your Impact**: Use measurable numbers (e.g. *'reduced latency by 40%'*, *'served 500+ users'*).\n2. **Include Essential Sections**: Education with CGPA, Technical Skills, Key Projects with GitHub links, and Experience.\n3. **Targeted Technical Keywords**: Include the exact tech stack (e.g. Java, Spring Boot, MySQL or React, Node.js, MongoDB).\n4. **Use Strong Action Verbs**: Begin bullet points with *'Developed'*, *'Architected'*, *'Implemented'*, *'Automated'* rather than passive phrases.\n5. **Clean 1-Page Layout**: Keep it strictly one page for college internships.\n\nUse the **Resume Checker** tab in the sidebar to upload your PDF or DOCX resume for an instant ATS score and keyword gap analysis!",
+            "suggestions": [
+                "Resume checker",
+                "Application guide",
+                "Documents required",
+                "How to write a good resume?"
+            ]
+        },
+        {
+            "name": "interview_prep_faq",
+            "patterns": [
+                "interview prep",
+                "interview questions",
+                "coding exercises",
+                "mock interview",
+                "technical interview preparation",
+                "how to practice interview",
+                "mcqs"
+            ],
+            "keywords": {
+                "interview": 6,
+                "mcq": 5,
+                "mock": 5,
+                "practice": 4,
+                "coding": 4
+            },
+            "answer": "Technical Interview Preparation & Practice 🎯\n\n**Effective 4-Step Interview Strategy:**\n1. **Revise Core Concepts**: Master language fundamentals, OOP principles, memory models, and database querying.\n2. **Solve Topic-Wise MCQs**: Test yourself on edge cases, memory management, and language semantics.\n3. **Hands-On Coding Challenges**: Practice common array, string, and hash table algorithm problems.\n4. **Simulate Mock Interviews**: Practice explaining your thought process out loud under timed constraints.\n\nNavigate to the **Practice & Mock Interview** section in the sidebar to solve interactive MCQs, view starter coding templates, and run mock interview simulations!",
+            "suggestions": [
+                "Java roadmap",
+                "Python roadmap",
+                "How is selection done?",
+                "Application guide"
+            ]
+        }
+    ]
+}
